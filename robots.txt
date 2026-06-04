@@ -1,0 +1,20 @@
+# OlaPrestige — robots.txt
+# Restaurant livraison bio Cotonou, Bénin
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://olaprestige.netlify.app/sitemap.xml
