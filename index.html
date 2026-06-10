@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OlaPrestige — Le Goût en Abondance</title>
+  <meta name="description" content="OlaPrestige : livraison de mets premium à Cotonou. Pizzas, Chawarma, Salades, Cuisses braisées, Pain farci, Atièkè, Bûche de Noël, Sandwich. Livraison 10h–20h, 7j/7.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ═══════════════════ TOPBAR ═══════════════════ -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-dot"></span>
+    <span>Livraison 7j/7 · 10h – 20h · Tout Cotonou</span>
+  </div>
+  <div class="topbar-right">
+    <a href="tel:+2290141239272"><span style="color:var(--gold)">☎</span> +229 01 41 23 92 72</a>
+    <span class="topbar-sep">|</span>
+    <a href="https://wa.me/2290152372275" target="_blank">💬 WhatsApp</a>
+  </div>
+</div>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a href="#" class="logo-wrap">
+      <img src="logo.png" alt="OlaPrestige" class="logo-img">
+      <div class="logo-text-wrap">
+        <span class="logo-name">OlaPrestige</span>
+        <span class="logo-slogan">Le goût en abondance</span>
+      </div>
+    </a>
+
+    <!-- Recherche -->
+    <div class="search-wrap">
+      <input type="text" class="search-input" id="searchInput" placeholder="Rechercher un plat...">
+      <button class="search-btn" onclick="handleSearch()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+    </div>
+
+    <!-- Actions header -->
+    <div class="header-actions">
+      <a href="tel:+2290141239272" class="header-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.4 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.79-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>Appeler</span>
+      </a>
+      <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ═══════════════════ NAV CATÉGORIES ═══════════════════ -->
+<nav class="cat-nav" id="catNav">
+  <div class="cat-nav-inner">
+    <a href="#pizzas" class="cat-link" data-cat="pizzas">🍕 Pizzas</a>
+    <a href="#chawarma" class="cat-link" data-cat="chawarma">🥙 Chawarma</a>
+    <a href="#salades" class="cat-link" data-cat="salades">🥗 Salades</a>
+    <a href="#cuisses" class="cat-link" data-cat="cuisses">🍗 Cuisses braisées</a>
+    <a href="#pain-farci" class="cat-link" data-cat="pain-farci">🥖 Pain farci</a>
+    <a href="#atieke" class="cat-link" data-cat="atieke">🍚 Atièkè</a>
+    <a href="#buche" class="cat-link" data-cat="buche">🎂 Bûche de Noël</a>
+    <a href="#sandwich" class="cat-link" data-cat="sandwich">🥪 Sandwich</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-logo-wrap">
+      <img src="logo.png" alt="OlaPrestige" class="hero-logo">
+    </div>
+    <p class="hero-tag">🌟 Livraison Premium à Cotonou</p>
+    <h1 class="hero-title">Le goût en <em>abondance</em></h1>
+    <p class="hero-desc">Mets faits maison, cuisinés avec passion et livrés chez vous.<br>Commandez en quelques clics.</p>
+    <div class="hero-btns">
+      <a href="#catalogue" class="btn-gold">Voir le menu</a>
+      <a href="https://wa.me/2290152372275" class="btn-outline" target="_blank">💬 WhatsApp</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>8</strong><span>Catégories</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><strong>7j/7</strong><span>Disponible</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><strong>1 000F</strong><span>Livraison dès</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ TRUST BAR ═══════════════════ -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <span class="trust-icon">✅</span>
+    <span>Fait maison</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">🚀</span>
+    <span>Livraison rapide</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">💰</span>
+    <span>Prix accessibles</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">🕙</span>
+    <span>10h – 20h · 7j/7</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">📍</span>
+    <span>Tout Cotonou</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ CATALOGUE ═══════════════════ -->
+<main id="catalogue" class="catalogue">
+  <div class="catalogue-header">
+    <h2 class="section-title">Notre Menu</h2>
+    <p class="section-sub">Sélectionnez vos plats et commandez en un clic</p>
+  </div>
+
+  <!-- PIZZAS -->
+  <section id="pizzas" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🍕 Pizzas</h3>
+        <span class="badge-popular">Top vente</span>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="pizza1" data-name="Mini Pizzas (lot de 15)" data-price="5000" data-img="assets/img/pizzas/IMG-20260317-WA0045.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/pizzas/IMG-20260317-WA0045.jpg" alt="Mini Pizzas OlaPrestige" loading="lazy">
+          <span class="badge-card">🔥 Populaire</span>
+        </div>
+        <div class="product-info">
+          <h4>Mini Pizzas OlaPrestige</h4>
+          <p class="product-desc">Lot de 15 mini pizzas faites maison, généreusement garnies.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">5 000 F</span>
+              <span class="price-unit">/ lot de 15</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAWARMA -->
+  <section id="chawarma" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🥙 Chawarma</h3>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="chawarma1" data-name="Chawarma Simple" data-price="2000" data-img="assets/img/chawarma/IMG-20260317-WA0041.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/chawarma/IMG-20260317-WA0041.jpg" alt="Chawarma OlaPrestige" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h4>Chawarma Simple</h4>
+          <p class="product-desc">Chawarma préparé avec des ingrédients frais.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">2 000 F</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-id="chawarma2" data-name="Chawarma Spécial" data-price="3000" data-img="assets/img/chawarma/IMG-20260317-WA0041.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/chawarma/IMG-20260317-WA0041.jpg" alt="Chawarma Spécial OlaPrestige" loading="lazy">
+          <span class="badge-card">⭐ Spécial</span>
+        </div>
+        <div class="product-info">
+          <h4>Chawarma Spécial</h4>
+          <p class="product-desc">Chawarma premium avec garnitures généreuses.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">3 000 F</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SALADES -->
+  <section id="salades" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🥗 Salades garnies</h3>
+        <span class="badge-popular">Varié</span>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="salade1" data-name="Salade Garnie Petite" data-price="2500" data-img="assets/img/salades/IMG-20251224-WA0015.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/salades/IMG-20251224-WA0015.jpg" alt="Salade OlaPrestige" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h4>Salade Garnie</h4>
+          <p class="product-desc">Salade fraîche généreusement garnie.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">À partir de 2 500 F</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-id="salade2" data-name="Salade Prestige" data-price="25000" data-img="assets/img/salades/IMG-20260317-WA0053.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/salades/IMG-20260317-WA0053.jpg" alt="Salade Prestige OlaPrestige" loading="lazy">
+          <span class="badge-card">👑 Prestige</span>
+        </div>
+        <div class="product-info">
+          <h4>Salade Prestige</h4>
+          <p class="product-desc">Notre salade signature, garnitures premium.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">25 000 F</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUISSES BRAISÉES -->
+  <section id="cuisses" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🍗 Cuisses braisées</h3>
+        <span class="badge-popular">Événements</span>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="cuisses1" data-name="Cuisses Braisées (sur devis)" data-price="0" data-img="assets/img/cuisses-braisees/IMG-20260605-WA0001.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/cuisses-braisees/IMG-20260605-WA0001.jpg" alt="Cuisses braisées OlaPrestige" loading="lazy">
+          <span class="badge-card">🎉 Événements</span>
+        </div>
+        <div class="product-info">
+          <h4>Cuisses Braisées</h4>
+          <p class="product-desc">Idéal pour vos manifestations. Prix selon nombre de personnes.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">Sur devis</span>
+            </div>
+            <a href="https://wa.me/2290152372275?text=Bonjour%2C%20je%20veux%20un%20devis%20pour%20des%20cuisses%20bra%C3%AEs%C3%A9es" class="btn-add" target="_blank">Demander</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN FARCI -->
+  <section id="pain-farci" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🥖 Pain farci</h3>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="pain1" data-name="Pain Farci (lot de 5)" data-price="4000" data-img="assets/img/Pain_farcis/IMG-20260519-WA0006.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/Pain_farcis/IMG-20260519-WA0006.jpg" alt="Pain farci OlaPrestige" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h4>Pain Farci Maison</h4>
+          <p class="product-desc">Pains farcis généreux, préparés avec soin. À partir de 5 pains.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">4 000 F</span>
+              <span class="price-unit">/ lot de 5</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATIÈKÈ -->
+  <section id="atieke" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🍚 Atièkè</h3>
+        <span class="badge-popular">Spécialité</span>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="atieke1" data-name="Atièkè Complet" data-price="2500" data-img="assets/img/atieke/IMG-20251224-WA0009.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/atieke/IMG-20251224-WA0009.jpg" alt="Atièkè OlaPrestige" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h4>Atièkè Complet</h4>
+          <p class="product-desc">Atièkè fait maison, servi en plat complet.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">2 500 F</span>
+              <span class="price-unit">/ plat</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BÛCHE DE NOËL -->
+  <section id="buche" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🎂 Bûche de Noël</h3>
+        <span class="badge-premium">Premium</span>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="buche1" data-name="Bûche de Noël Prestige" data-price="15000" data-img="assets/img/buche-de-noel/IMG-20260509-WA0001.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/buche-de-noel/IMG-20260509-WA0001.jpg" alt="Bûche de Noël OlaPrestige" loading="lazy">
+          <span class="badge-card">⭐ Premium</span>
+        </div>
+        <div class="product-info">
+          <h4>Bûche de Noël Prestige</h4>
+          <p class="product-desc">Bûche artisanale, ingrédients de qualité.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">À partir de 15 000 F</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SANDWICH -->
+  <section id="sandwich" class="product-section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h3>🥪 Sandwich</h3>
+      </div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" data-id="sandwich1" data-name="Sandwich Maison" data-price="900" data-img="assets/img/sandwich/IMG-20260514-WA0019.jpg">
+        <div class="product-img-wrap">
+          <img src="assets/img/sandwich/IMG-20260514-WA0019.jpg" alt="Sandwich OlaPrestige" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h4>Sandwich Maison</h4>
+          <p class="product-desc">Sandwich fait maison, garni généreusement.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="price">900 F</span>
+              <span class="price-unit">/ unité</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(this)">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════ COMMENT COMMANDER ═══════════════════ -->
+<section class="how-to">
+  <h2 class="section-title-light">Comment commander ?</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Choisissez</h4>
+      <p>Parcourez notre menu et ajoutez vos plats au panier</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Validez</h4>
+      <p>Renseignez votre nom, quartier et numéro de téléphone</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Confirmez</h4>
+      <p>Votre commande est envoyée directement sur WhatsApp</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Savourez</h4>
+      <p>Paiement à la livraison ou Mobile Money</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="OlaPrestige" class="footer-logo">
+      <p class="footer-tagline">Le goût en abondance</p>
+      <p class="footer-addr">📍 Agla Pylône, Cotonou, Bénin</p>
+    </div>
+    <div class="footer-col">
+      <h5>Menu</h5>
+      <a href="#pizzas">Pizzas</a>
+      <a href="#chawarma">Chawarma</a>
+      <a href="#salades">Salades garnies</a>
+      <a href="#cuisses">Cuisses braisées</a>
+      <a href="#pain-farci">Pain farci</a>
+      <a href="#atieke">Atièkè</a>
+      <a href="#buche">Bûche de Noël</a>
+      <a href="#sandwich">Sandwich</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <a href="tel:+2290141239272"><span style="color:var(--gold)">☎</span> +229 01 41 23 92 72</a>
+      <a href="https://wa.me/2290152372275" target="_blank"><span style="color:#25D366">●</span> WhatsApp · +229 01 52 37 22 75</a>
+      <p class="footer-hours">Lun – Dim · 10h – 20h</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 OlaPrestige. Tous droits réservés. · Agla Pylône, Cotonou, Bénin</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════ PANIER SLIDE-IN ═══════════════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>🛒 Mon Panier</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <p>🍽️ Votre panier est vide</p>
+      <small>Ajoutez des plats pour commencer</small>
+    </div>
+    <div id="cartItems"></div>
+  </div>
+
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-wrap">
+      <span>Sous-total</span>
+      <span id="cartSubtotal">0 F</span>
+    </div>
+    <div class="cart-total-wrap">
+      <span>Livraison</span>
+      <span>À partir de 1 000 F</span>
+    </div>
+    <div class="cart-total-wrap cart-total-main">
+      <strong>Total estimé</strong>
+      <strong id="cartTotal">0 F</strong>
+    </div>
+    <button class="btn-checkout" onclick="openCheckout()">
+      Valider la commande →
+    </button>
+  </div>
+</aside>
+
+<!-- ═══════════════════ MODAL COMMANDE ═══════════════════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3>📋 Votre commande</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="modalOrderSummary" class="modal-summary"></div>
+      <div class="form-group">
+        <label>Nom complet *</label>
+        <input type="text" id="clientName" placeholder="Ex: Kofi Mensah">
+      </div>
+      <div class="form-group">
+        <label>Quartier / Zone *</label>
+        <input type="text" id="clientZone" placeholder="Ex: Akpakpa, Cadjehoun...">
+      </div>
+      <div class="form-group">
+        <label>Numéro de téléphone *</label>
+        <input type="tel" id="clientPhone" placeholder="Ex: +229 01 XX XX XX XX">
+      </div>
+      <div class="form-group">
+        <label>Note (optionnel)</label>
+        <textarea id="clientNote" placeholder="Instructions spéciales, allergies..."></textarea>
+      </div>
+      <div class="modal-info">
+        💳 Paiement à la livraison ou Mobile Money
+      </div>
+      <button class="btn-whatsapp" onclick="sendToWhatsApp()">
+        📲 Confirmer via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<script src="main.js"></script>
+</body>
+</html>
