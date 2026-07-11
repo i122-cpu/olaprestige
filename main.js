@@ -320,22 +320,29 @@ if (scrollTopBtn) {
   });
 }
 
-/* ═══ BURGER MENU ═══ */
+/* ═══ BURGER MENU PREMIUM ═══ */
 function toggleBurger() {
-  const btn = document.getElementById('burgerBtn');
-  const nav = document.getElementById('catNavIn');
+  const btn  = document.getElementById('burgerBtn');
+  const nav  = document.getElementById('catNavIn');
+  const wrap = document.getElementById('catNav');
   if (!btn || !nav) return;
+  const isOpening = !nav.classList.contains('open');
   btn.classList.toggle('open');
   nav.classList.toggle('open');
+  if (wrap) wrap.classList.toggle('menu-open', isOpening);
+  document.body.style.overflow = isOpening ? 'hidden' : '';
 }
 
 // Fermer le burger quand on clique sur un lien
 document.querySelectorAll('.cat-lk').forEach(lk => {
   lk.addEventListener('click', () => {
-    const btn = document.getElementById('burgerBtn');
-    const nav = document.getElementById('catNavIn');
-    if (btn) btn.classList.remove('open');
-    if (nav) nav.classList.remove('open');
+    const btn  = document.getElementById('burgerBtn');
+    const nav  = document.getElementById('catNavIn');
+    const wrap = document.getElementById('catNav');
+    if (btn)  btn.classList.remove('open');
+    if (nav)  nav.classList.remove('open');
+    if (wrap) wrap.classList.remove('menu-open');
+    document.body.style.overflow = '';
   });
 });
 
