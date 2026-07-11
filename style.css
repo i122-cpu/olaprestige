@@ -1087,22 +1087,22 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 /* ─── Panel chat ─── */
 .olabot-panel {
   position:fixed !important;
-  right:16px !important;
-  bottom:220px !important;
+  right:14px !important;
+  bottom:170px !important;
   top:auto !important;
   left:auto !important;
   z-index:99998 !important;
-  width:min(360px, calc(100vw - 32px));
+  width:min(300px, calc(100vw - 28px));
   background:var(--blanc);
-  border-radius:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.28), 0 0 0 1px rgba(201,168,76,0.12);
+  border-radius:16px;
+  box-shadow:0 16px 48px rgba(0,0,0,0.26), 0 0 0 1px rgba(201,168,76,0.12);
   display:flex; flex-direction:column;
   opacity:0; pointer-events:none;
   transform:scale(0.9) translateY(10px);
   transform-origin:bottom right;
   transition:all 0.28s cubic-bezier(.4,0,.2,1);
   overflow:hidden;
-  max-height:min(520px, 70vh);
+  max-height:min(420px, 60vh);
 }
 .olabot-panel.open {
   opacity:1; pointer-events:all;
@@ -1112,20 +1112,20 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 /* Header */
 .olabot-header {
   display:flex; align-items:center; justify-content:space-between;
-  padding:14px 16px;
+  padding:10px 12px;
   background:linear-gradient(135deg, var(--noir) 0%, var(--noir3) 100%);
   border-bottom:1px solid rgba(201,168,76,0.15);
   flex-shrink:0;
 }
-.olabot-header-info { display:flex; align-items:center; gap:10px; }
+.olabot-header-info { display:flex; align-items:center; gap:8px; }
 .olabot-avatar-img {
-  width:38px; height:38px; border-radius:50%;
+  width:30px; height:30px; border-radius:50%;
   object-fit:cover; object-position:top;
   border:2px solid var(--or);
   flex-shrink:0;
 }
-.olabot-header-info strong { display:block; color:var(--or); font-size:14px; }
-.olabot-header-info span { font-size:11px; color:rgba(255,255,255,0.5); display:flex; align-items:center; gap:4px; }
+.olabot-header-info strong { display:block; color:var(--or); font-size:13px; }
+.olabot-header-info span { font-size:10px; color:rgba(255,255,255,0.5); display:flex; align-items:center; gap:4px; }
 .status-dot {
   width:6px; height:6px; border-radius:50%;
   background:#4caf50; display:inline-block;
@@ -1141,8 +1141,8 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 
 /* Messages */
 .olabot-messages {
-  flex:1; overflow-y:auto; padding:14px;
-  display:flex; flex-direction:column; gap:12px;
+  flex:1; overflow-y:auto; padding:10px;
+  display:flex; flex-direction:column; gap:8px;
   scroll-behavior:smooth; background:var(--ivoire);
 }
 .olabot-messages::-webkit-scrollbar { width:4px; }
@@ -1153,14 +1153,14 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 .olabot-msg.bot  { justify-content:flex-start; }
 
 .msg-avatar {
-  width:28px; height:28px; border-radius:50%;
+  width:22px; height:22px; border-radius:50%;
   object-fit:cover; object-position:top;
   border:1.5px solid var(--or); flex-shrink:0;
 }
 
 .olabot-bubble {
-  max-width:80%; padding:10px 14px;
-  border-radius:16px; font-size:13px; line-height:1.6;
+  max-width:82%; padding:8px 12px;
+  border-radius:14px; font-size:12px; line-height:1.5;
 }
 .olabot-msg.user .olabot-bubble {
   background:var(--noir); color:var(--blanc);
@@ -1192,34 +1192,34 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 
 /* Suggestions */
 .olabot-suggestions {
-  display:flex; flex-wrap:wrap; gap:6px;
-  padding:10px 14px; background:var(--ivoire);
+  display:flex; flex-wrap:wrap; gap:5px;
+  padding:8px 10px; background:var(--ivoire);
   border-top:1px solid #efefef; flex-shrink:0;
 }
 .olabot-suggestions button {
   background:var(--blanc); color:var(--noir);
-  border:1px solid #ddd; padding:6px 11px;
-  border-radius:20px; font-size:11px; font-weight:500;
+  border:1px solid #ddd; padding:5px 9px;
+  border-radius:20px; font-size:10px; font-weight:500;
   cursor:pointer; transition:all 0.2s; font-family:'Inter',sans-serif;
 }
 .olabot-suggestions button:hover { background:var(--or); color:var(--noir); border-color:var(--or); }
 
 /* Input */
 .olabot-input-wrap {
-  display:flex; align-items:center; gap:8px;
-  padding:10px 12px; background:var(--blanc);
+  display:flex; align-items:center; gap:6px;
+  padding:8px 10px; background:var(--blanc);
   border-top:1px solid #efefef; flex-shrink:0;
 }
 .olabot-input {
   flex:1; border:1.5px solid #e8e8e8; border-radius:20px;
-  padding:9px 14px; font-size:13px;
+  padding:7px 12px; font-size:12px;
   font-family:'Inter',sans-serif; outline:none;
   transition:border-color 0.2s; background:var(--ivoire);
 }
 .olabot-input:focus { border-color:var(--braise); }
 .olabot-input:disabled { opacity:0.6; }
 .olabot-send {
-  width:36px; height:36px; border-radius:50%;
+  width:32px; height:32px; border-radius:50%;
   background:var(--braise); color:var(--blanc);
   border:none; cursor:pointer;
   display:flex; align-items:center; justify-content:center;
