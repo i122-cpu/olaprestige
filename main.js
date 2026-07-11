@@ -322,14 +322,18 @@ if (scrollTopBtn) {
 
 /* ═══ BURGER MENU PREMIUM ═══ */
 function toggleBurger() {
-  const btn  = document.getElementById('burgerBtn');
-  const nav  = document.getElementById('catNavIn');
-  const wrap = document.getElementById('catNav');
+  const btn   = document.getElementById('burgerBtn');
+  const nav   = document.getElementById('catNavIn');
+  const wrap  = document.getElementById('catNav');
+  const chef  = document.getElementById('chefFloat');
+  const fab   = document.querySelector('.wa-float');
   if (!btn || !nav) return;
   const isOpening = !nav.classList.contains('open');
   btn.classList.toggle('open');
   nav.classList.toggle('open');
   if (wrap) wrap.classList.toggle('menu-open', isOpening);
+  if (chef) chef.style.display = isOpening ? 'none' : '';
+  if (fab)  fab.style.display  = isOpening ? 'none' : '';
   document.body.style.overflow = isOpening ? 'hidden' : '';
 }
 
@@ -339,9 +343,13 @@ document.querySelectorAll('.cat-lk').forEach(lk => {
     const btn  = document.getElementById('burgerBtn');
     const nav  = document.getElementById('catNavIn');
     const wrap = document.getElementById('catNav');
+    const chef = document.getElementById('chefFloat');
+    const fab  = document.querySelector('.wa-float');
     if (btn)  btn.classList.remove('open');
     if (nav)  nav.classList.remove('open');
     if (wrap) wrap.classList.remove('menu-open');
+    if (chef) chef.style.display = '';
+    if (fab)  fab.style.display  = '';
     document.body.style.overflow = '';
   });
 });
