@@ -1043,27 +1043,27 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 }
 
 .chef-avatar-wrap {
-  position:relative; width:56px; height:56px;
+  position:relative; width:40px; height:40px;
   animation: chef-levitate 4s ease-in-out infinite;
 }
 .chef-img {
-  width:56px; height:56px;
+  width:40px; height:40px;
   border-radius:50%; object-fit:cover; object-position:top;
-  border:2px solid var(--or);
+  border:1.5px solid var(--or);
   box-shadow:0 3px 14px rgba(201,168,76,0.35), 0 4px 16px rgba(0,0,0,0.18);
 }
 .chef-badge {
-  position:absolute; bottom:0; right:0;
-  width:16px; height:16px; border-radius:50%;
+  position:absolute; bottom:-1px; right:-1px;
+  width:12px; height:12px; border-radius:50%;
   background:var(--braise); color:var(--blanc);
   font-size:8px; font-weight:700;
   display:flex; align-items:center; justify-content:center;
   border:1.5px solid var(--blanc);
 }
 .chef-label {
-  font-size:11px; font-weight:700; color:var(--or);
-  background:var(--noir); padding:3px 8px; border-radius:10px;
-  margin-top:4px; letter-spacing:0.5px;
+  font-size:9px; font-weight:700; color:var(--or);
+  background:var(--noir); padding:2px 6px; border-radius:8px;
+  margin-top:3px; letter-spacing:0.3px;
   box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 
@@ -1253,7 +1253,7 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
     bottom:80px !important;
     top:auto !important;
   }
-  .chef-img, .chef-avatar-wrap { width:64px; height:64px; }
+  .chef-img, .chef-avatar-wrap { width:36px; height:36px; }
   .chef-bubble { font-size:11px; max-width:160px; white-space:nowrap; }
   .chef-label { font-size:10px; }
   .olabot-panel {
