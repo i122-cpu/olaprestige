@@ -327,6 +327,8 @@ function toggleBurger() {
   const wrap  = document.getElementById('catNav');
   const chef  = document.getElementById('chefFloat');
   const fab   = document.querySelector('.wa-float');
+  const hdr   = document.getElementById('hdr');
+  const topb  = document.querySelector('.topbar');
   if (!btn || !nav) return;
   const isOpening = !nav.classList.contains('open');
   btn.classList.toggle('open');
@@ -334,6 +336,8 @@ function toggleBurger() {
   if (wrap) wrap.classList.toggle('menu-open', isOpening);
   if (chef) chef.style.display = isOpening ? 'none' : '';
   if (fab)  fab.style.display  = isOpening ? 'none' : '';
+  if (hdr)  hdr.style.visibility  = isOpening ? 'hidden' : '';
+  if (topb) topb.style.visibility = isOpening ? 'hidden' : '';
   document.body.style.overflow = isOpening ? 'hidden' : '';
 }
 
@@ -345,11 +349,15 @@ document.querySelectorAll('.cat-lk').forEach(lk => {
     const wrap = document.getElementById('catNav');
     const chef = document.getElementById('chefFloat');
     const fab  = document.querySelector('.wa-float');
+    const hdr  = document.getElementById('hdr');
+    const topb = document.querySelector('.topbar');
     if (btn)  btn.classList.remove('open');
     if (nav)  nav.classList.remove('open');
     if (wrap) wrap.classList.remove('menu-open');
     if (chef) chef.style.display = '';
     if (fab)  fab.style.display  = '';
+    if (hdr)  hdr.style.visibility  = '';
+    if (topb) topb.style.visibility = '';
     document.body.style.overflow = '';
   });
 });
