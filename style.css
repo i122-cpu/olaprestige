@@ -2152,3 +2152,41 @@ body.light-mode .olabot-messages { background:#F5F5F5; }
   .family-notify-row { flex-direction:column; }
   .family-notify-btn { width:100%; }
 }
+
+/* ═══════════ CONFIRMATION PROPOSEZ VOTRE PLAT ═══════════ */
+.suggest-success {
+  background:var(--blanc);
+  border-radius:var(--r);
+  padding:40px 28px;
+  text-align:center;
+  border:2px solid #4caf50;
+  box-shadow:0 8px 32px rgba(76,175,80,0.15);
+  animation:suggest-success-in 0.4s ease;
+}
+@keyframes suggest-success-in {
+  from { opacity:0; transform:translateY(12px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+.suggest-success-icon {
+  display:flex; align-items:center; justify-content:center;
+  width:52px; height:52px; margin:0 auto 16px;
+  background:#4caf50; color:var(--blanc);
+  border-radius:50%; font-size:26px; font-weight:700;
+}
+.suggest-success h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px; color:var(--noir); font-weight:600;
+  margin-bottom:10px;
+}
+.suggest-success p {
+  font-size:13px; color:var(--gris);
+  line-height:1.7; font-weight:300;
+  max-width:380px; margin:0 auto 20px;
+}
+.suggest-again-btn {
+  background:transparent; color:var(--noir);
+  border:1.5px solid var(--noir); padding:10px 22px;
+  border-radius:var(--rsm); font-size:13px; font-weight:600;
+  cursor:pointer; transition:all var(--t);
+}
+.suggest-again-btn:hover { background:var(--noir); color:var(--or); }

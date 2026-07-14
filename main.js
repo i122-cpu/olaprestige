@@ -303,7 +303,21 @@ function sendSuggestion() {
   document.getElementById('sugDesc').value = '';
   document.getElementById('sugBudget').value = '';
 
-  toast(fr ? '🎉 Merci pour votre proposition !' : '🎉 Thanks for your suggestion!');
+  // Affiche la vraie section de confirmation sur la page (au lieu d'un simple toast)
+  const form    = document.getElementById('suggestForm');
+  const success = document.getElementById('suggestSuccess');
+  if (form)    form.style.display = 'none';
+  if (success) {
+    success.style.display = 'block';
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function resetSuggestForm() {
+  const form    = document.getElementById('suggestForm');
+  const success = document.getElementById('suggestSuccess');
+  if (success) success.style.display = 'none';
+  if (form)    form.style.display = '';
 }
 
 /* ═══ BOUTON RETOUR EN HAUT ═══ */
