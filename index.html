@@ -110,7 +110,7 @@
       </div>
     </a>
     <div class="srch-w">
-      <input type="text" class="srch-in" id="srchIn" placeholder="Rechercher un plat..." aria-label="Rechercher un plat">
+      <input type="text" class="srch-in" id="srchIn" placeholder="Rechercher un plat..." data-placeholder-fr="Rechercher un plat..." data-placeholder-en="Search a dish..." aria-label="Rechercher un plat">
       <button class="srch-btn" onclick="doSearch()" aria-label="Lancer la recherche">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
@@ -335,12 +335,23 @@
       </article>
 
       <!-- FORMULE FAMILLE -->
-      <article class="form-card form-card-soon">
+      <article class="form-card form-card-soon" id="familyCard">
         <div class="form-card-icon">👨‍👩‍👧‍👦</div>
         <h3 class="form-card-ttl" data-fr="Formule Famille / Groupe" data-en="Family / Group Combo">Formule Famille / Groupe</h3>
         <p class="form-card-ds" data-fr="Des plats à partager pensés pour les familles et les groupes. Détails à venir très prochainement." data-en="Sharing dishes designed for families and groups. Details coming soon.">Des plats à partager pensés pour les familles et les groupes. Détails à venir très prochainement.</p>
-        <div class="form-card-ft">
+
+        <div class="form-card-ft family-notify" id="familyNotifyForm">
           <span class="form-soon-badge" data-fr="✦ Bientôt disponible" data-en="✦ Coming soon">✦ Bientôt disponible</span>
+          <p class="family-notify-txt" data-fr="Soyez averti(e) dès le lancement :" data-en="Get notified at launch:">Soyez averti(e) dès le lancement :</p>
+          <div class="family-notify-row">
+            <input type="tel" id="familyPhone" class="family-notify-input" placeholder="+229 01 XX XX XX XX" data-placeholder-fr="+229 01 XX XX XX XX" data-placeholder-en="+229 01 XX XX XX XX">
+            <button class="family-notify-btn" onclick="notifyFamilyLaunch()" data-fr="M'avertir" data-en="Notify me">M'avertir</button>
+          </div>
+        </div>
+
+        <div class="family-notify-success" id="familyNotifySuccess" style="display:none">
+          <span>✓</span>
+          <p data-fr="Merci ! Nous vous préviendrons dès que la Formule Famille sera disponible." data-en="Thanks! We'll let you know as soon as the Family Combo is available.">Merci ! Nous vous préviendrons dès que la Formule Famille sera disponible.</p>
         </div>
       </article>
     </div>

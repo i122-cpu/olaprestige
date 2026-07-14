@@ -2099,3 +2099,56 @@ body.light-mode .olabot-messages { background:#F5F5F5; }
   .zone-row { padding:12px 14px; }
   .zone-price { font-size:16px; }
 }
+
+/* ═══════════ FORMULE FAMILLE — NOTIFICATION ═══════════ */
+.family-notify { display:flex; flex-direction:column; gap:10px; align-items:flex-start; width:100%; }
+.family-notify-txt {
+  font-size:12px; color:rgba(255,255,255,0.55);
+  font-weight:300; margin-top:4px;
+}
+.family-notify-row {
+  display:flex; gap:8px; width:100%;
+  flex-wrap:wrap;
+}
+.family-notify-input {
+  flex:1; min-width:140px;
+  padding:9px 12px;
+  border:1px solid rgba(201,168,76,0.25);
+  border-radius:var(--rsm);
+  background:rgba(255,255,255,0.03);
+  color:var(--blanc);
+  font-size:13px; font-family:'Inter',sans-serif;
+  outline:none; transition:border-color var(--t);
+}
+.family-notify-input::placeholder { color:rgba(255,255,255,0.3); }
+.family-notify-input:focus { border-color:var(--or); }
+.family-notify-btn {
+  background:var(--or); color:var(--noir);
+  border:none; padding:9px 16px;
+  border-radius:var(--rsm);
+  font-size:12px; font-weight:700;
+  cursor:pointer; white-space:nowrap;
+  transition:all var(--t);
+}
+.family-notify-btn:hover { background:var(--or-lt); }
+
+.family-notify-success {
+  display:flex; align-items:flex-start; gap:10px;
+  background:rgba(76,175,80,0.08);
+  border:1px solid rgba(76,175,80,0.25);
+  border-radius:var(--rsm);
+  padding:14px;
+}
+.family-notify-success span {
+  color:#4caf50; font-size:16px; font-weight:700;
+  flex-shrink:0;
+}
+.family-notify-success p {
+  font-size:12px; color:rgba(255,255,255,0.7);
+  line-height:1.6; font-weight:300;
+}
+
+@media (max-width:400px) {
+  .family-notify-row { flex-direction:column; }
+  .family-notify-btn { width:100%; }
+}

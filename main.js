@@ -15,6 +15,9 @@ function setLang(l) {
     el.placeholder = el.getAttribute('data-placeholder-' + l);
   });
   updateCartUI();
+  if (typeof updateStatus === 'function') updateStatus();
+  if (typeof updateCountdown === 'function') updateCountdown();
+  if (typeof updateOlaBotLang === 'function') updateOlaBotLang();
 }
 
 // Appliquer la langue sauvegardée au chargement
@@ -29,7 +32,12 @@ function updateStatus() {
   const open = h >= 10 && h < 20;
   const p = document.getElementById('statusPill');
   if (!p) return;
-  p.textContent = open ? '● Ouvert' : '● Fermé';
+  const isEn = lang === 'en';
+  if (open) {
+    p.textContent = isEn ? '● Open' : '● Ouvert';
+  } else {
+    p.textContent = isEn ? '● Closed' : '● Fermé';
+  }
   p.className = 'status-pill ' + (open ? 's-open' : 's-closed');
 }
 updateStatus();
@@ -442,19 +450,66 @@ function updateCountdown() {
   const rs = remaining % 60;
 
   const pad = n => String(n).padStart(2, '0');
+  const isEn = lang === 'en';
 
   if (rh > 0) {
-    timer.textContent = `${pad(rh)}h ${pad(rm)}m ${pad(rs)}s`;
+    timer.textContent = isEn ? `${pad(rh)}h ${pad(rm)}m ${pad(rs)}s` : `${pad(rh)}h ${pad(rm)}m ${pad(rs)}s`;
   } else {
     timer.textContent = `${pad(rm)}m ${pad(rs)}s`;
+  }
+
+  if (text) {
+    text.innerHTML = isEn
+      ? '⏳ Order before <strong>7:30 PM</strong> for delivery tonight!'
+      : '⏳ Commandez avant <strong>19h30</strong> pour une livraison ce soir !';
   }
 
   if (remaining <= 1800) {
     // Moins de 30 min — urgence
     bar.style.background = 'linear-gradient(90deg, #8B0000 0%, #C00000 100%)';
-    if (text) text.innerHTML = '🚨 Dernière chance ! Commandez avant <strong>19h30</strong> ce soir !';
+    if (text) {
+      text.innerHTML = isEn
+        ? '🚨 Last call! Order before <strong>7:30 PM</strong> tonight!'
+        : '🚨 Dernière chance ! Commandez avant <strong>19h30</strong> ce soir !';
+    }
   }
 }
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+/* ═══ NOTIFICATION FORMULE FAMILLE ═══ */
+function notifyFamilyLaunch() {
+  const phoneInput = document.getElementById('familyPhone');
+  const form       = document.getElementById('familyNotifyForm');
+  const success    = document.getElementById('familyNotifySuccess');
+  if (!phoneInput) return;
+
+  const phone = phoneInput.value.trim();
+  const isEn  = typeof lang !== 'undefined' && lang === 'en';
+
+  if (!phone) {
+    showToast(isEn ? '⚠️ Enter your phone number' : '⚠️ Entrez votre numéro de téléphone');
+    return;
+  }
+
+  // Enregistrement local (persiste même après rechargement)
+  try {
+    const list = JSON.parse(localStorage.getItem('ola-family-notify') || '[]');
+    list.push({ phone, date: new Date().toISOString() });
+    localStorage.setItem('ola-family-notify', JSON.stringify(list));
+  } catch (e) {}
+
+  // Notifier aussi OlaPrestige via WhatsApp pour suivi manuel
+  const msg = isEn
+    ? `🔔 *FAMILY COMBO — Launch notification request*\\n\\nPhone: ${phone}\\n\\n_Sent automatically from olaprestige.netlify.app_`
+    : `🔔 *FORMULE FAMILLE — Demande d'avertissement*\\n\\nTéléphone : ${phone}\\n\\n_Envoyé automatiquement depuis olaprestige.netlify.app_`;
+
+  // On n'ouvre pas WhatsApp automatiquement pour ne pas interrompre l'utilisateur —
+  // on affiche juste la confirmation. Le lien reste disponible si besoin plus tard.
+
+  if (form)    form.style.display = 'none';
+  if (success) success.style.display = 'flex';
+
+  showToast(isEn ? '✓ You will be notified!' : '✓ Vous serez averti(e) !');
+}
