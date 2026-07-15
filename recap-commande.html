@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Récapitulatif de commande — OlaPrestige</title>
+  <meta name="description" content="Vérifiez votre commande OlaPrestige et renseignez vos informations de livraison.">
+  <meta name="robots" content="noindex, follow">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="recap">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="live-dot"></span>
+    <span>Livraison 7j/7 · 10h–20h · Tout Cotonou</span>
+    <span class="status-pill" id="statusPill"></span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-group">
+      <a href="tel:+2290141239272" class="t-icon" aria-label="Appeler">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.4 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.79-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a href="https://wa.me/2290152372275" target="_blank" class="t-icon" aria-label="WhatsApp">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      </a>
+    </div>
+    <div class="lang-sw">
+      <button class="lang-btn on" id="btnFR" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a href="index.html" class="logo-w">
+      <img src="logo.png" alt="Logo OlaPrestige" class="logo-img">
+      <div>
+        <div class="logo-nm">OlaPrestige</div>
+        <div class="logo-tg" data-fr="Le goût en abondance" data-en="Taste in abundance">Le goût en abondance</div>
+      </div>
+    </a>
+    <div style="flex:1"></div>
+    <div class="hdr-acts">
+      <a href="menu.html" class="call-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span data-fr="Retour au menu" data-en="Back to menu">Retour au menu</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- BANNIÈRE -->
+<section class="recap-banner">
+  <div class="recap-banner-in">
+    <p class="cat-ey" data-fr="✦ Dernière étape" data-en="✦ Final step">✦ Dernière étape</p>
+    <h1 class="recap-banner-ttl" data-fr="Récapitulatif de commande" data-en="Order summary">Récapitulatif de commande</h1>
+    <p class="recap-banner-sub" data-fr="Vérifiez votre sélection et renseignez vos informations de livraison." data-en="Check your selection and enter your delivery details.">Vérifiez votre sélection et renseignez vos informations de livraison.</p>
+  </div>
+</section>
+
+<!-- CONTENU -->
+<main class="recap-main">
+  <div class="recap-wrap">
+
+    <!-- COLONNE ARTICLES -->
+    <div class="recap-items-col">
+      <h2 class="recap-h2" data-fr="Votre commande" data-en="Your order">Votre commande</h2>
+      <div id="recapItemsList" class="recap-items-list"></div>
+
+      <div class="recap-empty" id="recapEmpty" style="display:none">
+        <span>🍽️</span>
+        <p data-fr="Votre panier est vide" data-en="Your cart is empty">Votre panier est vide</p>
+        <a href="menu.html" class="btn-gold" data-fr="Voir le menu" data-en="View menu">Voir le menu</a>
+      </div>
+
+      <div class="recap-totals" id="recapTotals">
+        <div class="recap-row"><span data-fr="Sous-total" data-en="Subtotal">Sous-total</span><span id="recapSub">0 F</span></div>
+        <div class="recap-row"><span data-fr="Livraison" data-en="Delivery">Livraison</span><span data-fr="Selon votre quartier" data-en="Based on your area">Selon votre quartier</span></div>
+        <div class="recap-row recap-row-total"><strong data-fr="Total estimé" data-en="Estimated total">Total estimé</strong><strong id="recapTotal">0 F</strong></div>
+      </div>
+    </div>
+
+    <!-- COLONNE FORMULAIRE -->
+    <div class="recap-form-col" id="recapFormCol">
+      <h2 class="recap-h2" data-fr="Informations de livraison" data-en="Delivery information">Informations de livraison</h2>
+
+      <div class="fg">
+        <label data-fr="Nom complet *" data-en="Full name *">Nom complet *</label>
+        <input type="text" id="recapName" placeholder="Ex: Kofi Mensah">
+      </div>
+      <div class="fg">
+        <label data-fr="Numéro de téléphone *" data-en="Phone number *">Numéro de téléphone *</label>
+        <input type="tel" id="recapPhone" placeholder="+229 01 XX XX XX XX">
+      </div>
+      <div class="fg">
+        <label data-fr="Quartier *" data-en="Neighborhood *">Quartier *</label>
+        <input type="text" id="recapZone" data-placeholder-fr="Ex: Akpakpa, Cadjehoun..." data-placeholder-en="Ex: Akpakpa, Cadjehoun..." placeholder="Ex: Akpakpa, Cadjehoun...">
+      </div>
+      <div class="fg">
+        <label data-fr="Adresse de livraison précise *" data-en="Precise delivery address *">Adresse de livraison précise *</label>
+        <textarea id="recapAddress" data-placeholder-fr="Rue, repère proche, indications utiles pour le livreur..." data-placeholder-en="Street, nearby landmark, useful hints for the delivery person..." placeholder="Rue, repère proche, indications utiles pour le livreur..."></textarea>
+      </div>
+      <div class="fg">
+        <label data-fr="Note (optionnel)" data-en="Note (optional)">Note (optionnel)</label>
+        <textarea id="recapNote" data-placeholder-fr="Instructions spéciales, allergies..." data-placeholder-en="Special instructions, allergies..." placeholder="Instructions spéciales, allergies..."></textarea>
+      </div>
+
+      <div class="recap-info" data-fr="💳 Paiement à la livraison ou Mobile Money" data-en="💳 Pay on delivery or Mobile Money">💳 Paiement à la livraison ou Mobile Money</div>
+
+      <button class="btn-wa recap-confirm-btn" onclick="confirmRecapOrder()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        <span data-fr="Confirmer via WhatsApp" data-en="Confirm via WhatsApp">Confirmer via WhatsApp</span>
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="ftr">
+  <div class="ftr-in">
+    <div>
+      <img src="logo.png" alt="OlaPrestige" class="ftr-logo">
+      <p class="ftr-tag" data-fr="Le goût en abondance" data-en="Taste in abundance">Le goût en abondance</p>
+      <p class="ftr-addr">📍 Agla Pylône, Cotonou, Bénin</p>
+    </div>
+    <div class="ftr-col">
+      <h5 data-fr="Navigation" data-en="Navigation">Navigation</h5>
+      <a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+      <a href="menu.html" data-fr="Notre Menu" data-en="Our Menu">Notre Menu</a>
+      <a href="legal.html" data-fr="Mentions légales" data-en="Legal">Mentions légales</a>
+    </div>
+    <div class="ftr-col">
+      <h5 data-fr="Contact" data-en="Contact">Contact</h5>
+      <a href="tel:+2290141239272" class="ftr-cl">📞 <span data-fr="Appel direct" data-en="Direct call">Appel direct</span></a>
+      <a href="https://wa.me/2290152372275" target="_blank" class="ftr-cl">💬 WhatsApp</a>
+      <p class="ftr-hrs" data-fr="Lun – Dim · 10h – 20h" data-en="Mon – Sun · 10am – 8pm">Lun – Dim · 10h – 20h</p>
+    </div>
+  </div>
+  <div class="ftr-bot">© 2026 OlaPrestige · Agla Pylône, Cotonou, Bénin</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+/* ═══ PAGE RÉCAP COMMANDE ═══ */
+function renderRecapPage() {
+  const list   = document.getElementById('recapItemsList');
+  const empty  = document.getElementById('recapEmpty');
+  const totals = document.getElementById('recapTotals');
+  const formCol = document.getElementById('recapFormCol');
+  if (!list) return;
+
+  if (!cart || cart.length === 0) {
+    list.innerHTML = '';
+    if (empty)   empty.style.display = 'flex';
+    if (totals)  totals.style.display = 'none';
+    if (formCol) formCol.style.display = 'none';
+    return;
+  }
+
+  if (empty)   empty.style.display = 'none';
+  if (totals)  totals.style.display = 'block';
+  if (formCol) formCol.style.display = 'block';
+
+  const sub = cart.reduce((s,i) => s + i.price * i.qty, 0);
+
+  list.innerHTML = cart.map(item => {
+    const nm = lang === 'en' ? item.nameEn : item.nameFr;
+    return `<div class="recap-item">
+      <img src="${item.img}" alt="${nm}" class="recap-item-img" onerror="this.src='logo.png'">
+      <div class="recap-item-info">
+        <div class="recap-item-nm">${nm}</div>
+        <div class="recap-item-qty-wrap">
+          <button class="qty-b" onclick="chQty('${item.id}',-1); renderRecapPage();">−</button>
+          <span class="qty-n">${item.qty}</span>
+          <button class="qty-b" onclick="chQty('${item.id}',1); renderRecapPage();">+</button>
+        </div>
+      </div>
+      <div class="recap-item-price">${fmt(item.price * item.qty)}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('recapSub').textContent   = fmt(sub);
+  document.getElementById('recapTotal').textContent = fmt(sub + 1000);
+}
+
+function confirmRecapOrder() {
+  const name    = document.getElementById('recapName').value.trim();
+  const phone   = document.getElementById('recapPhone').value.trim();
+  const zone    = document.getElementById('recapZone').value.trim();
+  const address = document.getElementById('recapAddress').value.trim();
+  const note    = document.getElementById('recapNote').value.trim();
+  const fr = lang === 'fr';
+
+  if (!cart || cart.length === 0) { toast(fr ? '⚠️ Votre panier est vide' : '⚠️ Your cart is empty'); return; }
+  if (!name)    { toast(fr ? '⚠️ Entrez votre nom' : '⚠️ Enter your name'); return; }
+  if (!phone)   { toast(fr ? '⚠️ Entrez votre téléphone' : '⚠️ Enter your phone'); return; }
+  if (!zone)    { toast(fr ? '⚠️ Entrez votre quartier' : '⚠️ Enter your area'); return; }
+  if (!address) { toast(fr ? '⚠️ Entrez votre adresse précise' : '⚠️ Enter your precise address'); return; }
+
+  const sub = cart.reduce((s,i) => s + i.price * i.qty, 0);
+
+  let msg = `✦ *${fr ? 'COMMANDE COMPLÈTE' : 'FULL ORDER'} — OlaPrestige*\\n\\n`;
+  msg += `👤 *${fr ? 'Client' : 'Customer'} :* ${name}\\n`;
+  msg += `📞 *${fr ? 'Téléphone' : 'Phone'} :* ${phone}\\n`;
+  msg += `📍 *${fr ? 'Quartier' : 'Area'} :* ${zone}\\n`;
+  msg += `🏠 *${fr ? 'Adresse' : 'Address'} :* ${address}\\n\\n`;
+  msg += `🍽️ *${fr ? 'Commande' : 'Order'} :*\\n`;
+  cart.forEach(item => {
+    const nm = fr ? item.nameFr : item.nameEn;
+    msg += `• ${nm} × ${item.qty} — ${fmt(item.price * item.qty)}\\n`;
+  });
+  msg += `\\n💰 *${fr ? 'Sous-total' : 'Subtotal'} :* ${fmt(sub)}`;
+  msg += `\\n🚚 *${fr ? 'Livraison' : 'Delivery'} :* ${fr ? 'Selon quartier' : 'Based on area'}`;
+  if (note) msg += `\\n📝 *Note :* ${note}`;
+  msg += '\\n\\n_olaprestige.netlify.app/recap-commande_';
+
+  window.open('https://wa.me/2290152372275?text=' + encodeURIComponent(msg), '_blank');
+
+  cart = [];
+  saveCart();
+  updateCartUI();
+  renderRecapPage();
+
+  toast(fr ? '🎉 Commande envoyée ! Merci.' : '🎉 Order sent! Thank you.');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(renderRecapPage, 60);
+});
+</script>
+</body>
+</html>

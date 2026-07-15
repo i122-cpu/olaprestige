@@ -2190,3 +2190,98 @@ body.light-mode .olabot-messages { background:#F5F5F5; }
   cursor:pointer; transition:all var(--t);
 }
 .suggest-again-btn:hover { background:var(--noir); color:var(--or); }
+
+/* ═══════════ LIEN RÉCAP DEPUIS LE PANIER ═══════════ */
+.btn-recap-link {
+  display:block; text-align:center;
+  margin-top:10px; font-size:12px;
+  color:var(--gris); text-decoration:underline;
+  transition:color var(--t);
+}
+.btn-recap-link:hover { color:var(--noir); }
+
+/* ═══════════ PAGE RÉCAP-COMMANDE ═══════════ */
+.recap-banner {
+  background:var(--noir);
+  padding:48px 20px 36px; text-align:center;
+  border-bottom:1px solid rgba(201,168,76,0.1);
+}
+.recap-banner-in { max-width:600px; margin:0 auto; }
+.recap-banner-ttl {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,5vw,42px);
+  color:var(--blanc); font-weight:600;
+  margin:10px 0 12px;
+}
+.recap-banner-sub {
+  color:rgba(255,255,255,0.55); font-size:14px;
+  font-weight:300; line-height:1.7;
+}
+
+.recap-main { background:var(--ivoire); padding:48px 20px 80px; }
+.recap-wrap {
+  max-width:1000px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:32px; align-items:start;
+}
+
+.recap-h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px; color:var(--noir); font-weight:600;
+  margin-bottom:20px; padding-bottom:10px;
+  border-bottom:2px solid rgba(201,168,76,0.2);
+}
+
+/* Colonne articles */
+.recap-items-list { display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
+.recap-item {
+  display:flex; align-items:center; gap:12px;
+  background:var(--blanc); border-radius:var(--rsm);
+  padding:12px; border:1px solid #EDE8DF;
+}
+.recap-item-img { width:56px; height:56px; border-radius:var(--rsm); object-fit:cover; flex-shrink:0; }
+.recap-item-info { flex:1; }
+.recap-item-nm { font-size:13px; font-weight:600; color:var(--noir); margin-bottom:6px; }
+.recap-item-qty-wrap { display:flex; align-items:center; gap:8px; }
+.recap-item-price { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:700; color:var(--noir); flex-shrink:0; }
+
+.recap-empty {
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  padding:48px 20px; text-align:center;
+  background:var(--blanc); border-radius:var(--r);
+  border:1px solid #EDE8DF;
+}
+.recap-empty span { font-size:36px; }
+.recap-empty p { font-size:14px; color:var(--gris); }
+
+.recap-totals {
+  background:var(--blanc); border-radius:var(--r);
+  padding:18px; border:1px solid #EDE8DF;
+}
+.recap-row { display:flex; justify-content:space-between; font-size:13px; color:var(--gris); margin-bottom:8px; }
+.recap-row-total {
+  font-size:16px; color:var(--noir); padding-top:10px;
+  margin-top:4px; border-top:1px solid #e5e5e5;
+}
+
+/* Colonne formulaire */
+.recap-form-col {
+  background:var(--blanc); border-radius:var(--r);
+  padding:24px; border:1px solid #EDE8DF;
+  box-shadow:0 2px 14px rgba(0,0,0,0.05);
+}
+.recap-info {
+  background:#fffbf0; border:1px solid rgba(201,168,76,0.3);
+  border-radius:var(--rsm); padding:12px 14px;
+  font-size:12px; color:#7a6000; margin-bottom:16px;
+}
+.recap-confirm-btn { width:100%; }
+
+@media (max-width:800px) {
+  .recap-wrap { grid-template-columns:1fr; }
+}
+@media (max-width:639px) {
+  .recap-banner { padding:36px 14px 28px; }
+  .recap-main { padding:32px 14px 60px; }
+  .recap-form-col { padding:18px; }
+}
