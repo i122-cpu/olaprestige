@@ -43,7 +43,7 @@ function createOlaBot() {
     <div class="olabot-messages" id="olaBotMessages">
       <div class="olabot-msg bot">
         <img src="chef-avatar.png" alt="Chef" class="msg-avatar">
-        <div class="olabot-bubble">
+        <div class="olabot-bubble" id="olaBotWelcomeMsg">
           Bienvenue chez <strong>OlaPrestige</strong> ! 🍽️<br><br>
           Je suis votre chef assistant. Vous avez faim ? Une question ? Je suis là pour vous guider vers le meilleur choix !
         </div>
@@ -51,10 +51,10 @@ function createOlaBot() {
     </div>
 
     <div class="olabot-suggestions" id="olaBotSugg">
-      <button onclick="sendQuick('Quels sont vos plats et prix ?')">📋 Le menu</button>
-      <button onclick="sendQuick('Aidez-moi à choisir selon mon budget')">🤔 Choisir</button>
-      <button onclick="sendQuick('Comment passer une commande ?')">📲 Commander</button>
-      <button onclick="sendQuick('Quels sont vos horaires et zones ?')">🕙 Infos</button>
+      <button id="sugMenu" onclick="sendQuick(this.dataset.q)" data-q="Quels sont vos plats et prix ?">📋 Le menu</button>
+      <button id="sugChoose" onclick="sendQuick(this.dataset.q)" data-q="Aidez-moi à choisir selon mon budget">🤔 Choisir</button>
+      <button id="sugOrder" onclick="sendQuick(this.dataset.q)" data-q="Comment passer une commande ?">📲 Commander</button>
+      <button id="sugInfo" onclick="sendQuick(this.dataset.q)" data-q="Quels sont vos horaires et zones ?">🕙 Infos</button>
     </div>
 
     <div class="olabot-input-wrap">
@@ -75,23 +75,32 @@ function createOlaBot() {
 
   document.body.appendChild(container);
 
-  // Messages alternés sur le chef
-  const bubbleMessages = [
+  // Messages alternés sur le chef — bilingue FR/EN
+  const bubbleMessagesFr = [
     "Bonjour ! Je peux vous aider 👋",
     "Vous avez faim ? 🍽️",
     "Découvrez notre menu !",
     "Livraison en 30 min ! 🚀",
     "Posez-moi vos questions 😊",
   ];
+  const bubbleMessagesEn = [
+    "Hi! I can help you 👋",
+    "Feeling hungry? 🍽️",
+    "Discover our menu!",
+    "Delivery in 30 min! 🚀",
+    "Ask me anything 😊",
+  ];
   let msgIndex = 0;
   setInterval(() => {
     if (!olaBotOpen) {
-      msgIndex = (msgIndex + 1) % bubbleMessages.length;
+      msgIndex = (msgIndex + 1) % bubbleMessagesFr.length;
       const el = document.getElementById('chefBubbleText');
       if (el) {
+        const olaLang = typeof lang !== 'undefined' ? lang : (localStorage.getItem('ola-lang') || 'fr');
+        const msgs = olaLang === 'en' ? bubbleMessagesEn : bubbleMessagesFr;
         el.style.opacity = '0';
         setTimeout(() => {
-          el.textContent = bubbleMessages[msgIndex];
+          el.textContent = msgs[msgIndex];
           el.style.opacity = '1';
         }, 300);
       }
@@ -206,7 +215,58 @@ function removeEl(id) {
   if (el) el.remove();
 }
 
-document.addEventListener('DOMContentLoaded', createOlaBot);
+function updateOlaBotLang() {
+  const olaLang = typeof lang !== 'undefined' ? lang : (localStorage.getItem('ola-lang') || 'fr');
+  const isEn = olaLang === 'en';
+
+  const welcome = document.getElementById('olaBotWelcomeMsg');
+  if (welcome) {
+    welcome.innerHTML = isEn
+      ? 'Welcome to <strong>OlaPrestige</strong>! 🍽️<br><br>I\'m your chef assistant. Hungry? Got a question? I\'m here to guide you to the best choice!'
+      : 'Bienvenue chez <strong>OlaPrestige</strong> ! 🍽️<br><br>Je suis votre chef assistant. Vous avez faim ? Une question ? Je suis là pour vous guider vers le meilleur choix !';
+  }
+
+  const status = document.getElementById('olaBotStatus');
+  if (status) {
+    status.innerHTML = isEn
+      ? '<span class="status-dot"></span> OlaPrestige Assistant'
+      : '<span class="status-dot"></span> Assistant OlaPrestige';
+  }
+
+  const input = document.getElementById('olaBotInput');
+  if (input) input.placeholder = isEn ? "Tell me what you want..." : "Dites-moi ce que vous voulez...";
+
+  const sugMenu = document.getElementById('sugMenu');
+  if (sugMenu) {
+    sugMenu.textContent = isEn ? '📋 Menu' : '📋 Le menu';
+    sugMenu.dataset.q = isEn ? 'What dishes and prices do you have?' : 'Quels sont vos plats et prix ?';
+  }
+  const sugChoose = document.getElementById('sugChoose');
+  if (sugChoose) {
+    sugChoose.textContent = isEn ? '🤔 Help me choose' : '🤔 Choisir';
+    sugChoose.dataset.q = isEn ? 'Help me choose based on my budget' : 'Aidez-moi à choisir selon mon budget';
+  }
+  const sugOrder = document.getElementById('sugOrder');
+  if (sugOrder) {
+    sugOrder.textContent = isEn ? '📲 Order' : '📲 Commander';
+    sugOrder.dataset.q = isEn ? 'How do I place an order?' : 'Comment passer une commande ?';
+  }
+  const sugInfo = document.getElementById('sugInfo');
+  if (sugInfo) {
+    sugInfo.textContent = isEn ? '🕙 Info' : '🕙 Infos';
+    sugInfo.dataset.q = isEn ? 'What are your hours and delivery areas?' : 'Quels sont vos horaires et zones ?';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  createOlaBot();
+  // On force la traduction juste après la création des éléments,
+  // sans dépendre de l'ordre de chargement de main.js
+  updateOlaBotLang();
+  // Sécurité supplémentaire au cas où la langue changerait juste après (ex: chargement lent)
+  setTimeout(updateOlaBotLang, 200);
+  setTimeout(updateOlaBotLang, 800);
+});
 
 
 /* ═══ EFFET ÉLASTIQUE AU SCROLL ═══
