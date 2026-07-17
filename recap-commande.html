@@ -221,14 +221,12 @@ function confirmRecapOrder() {
   if (note) msg += `\\n📝 *Note :* ${note}`;
   msg += '\\n\\n_olaprestige.netlify.app/recap-commande_';
 
-  window.open('https://wa.me/2290152372275?text=' + encodeURIComponent(msg), '_blank');
+  showReceipt({ name, zone: `${zone} — ${address}`, phone, note, items: [...cart], subtotal: sub, fr, waMsg: msg });
 
   cart = [];
   saveCart();
   updateCartUI();
   renderRecapPage();
-
-  toast(fr ? '🎉 Commande envoyée ! Merci.' : '🎉 Order sent! Thank you.');
 }
 
 document.addEventListener('DOMContentLoaded', () => {

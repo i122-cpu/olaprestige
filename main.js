@@ -69,9 +69,36 @@ function addToCart(btn) {
   else cart.push({ id, nameFr, nameEn, price, img, qty:1 });
   saveCart();
   updateCartUI();
+  playAddSound();
   const name = lang === 'en' ? nameEn : nameFr;
   toast('✦ ' + name + (lang === 'fr' ? ' ajouté' : ' added'));
   openCart();
+}
+
+/* ═══ SON DE CONFIRMATION — Web Audio API, pas besoin de fichier ═══ */
+let audioCtx = null;
+function playAddSound() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = audioCtx.currentTime;
+
+    // Petit "ding" à deux notes montantes — satisfaisant, discret
+    [880, 1320].forEach((freq, i) => {
+      const osc  = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + i * 0.08);
+      gain.gain.setValueAtTime(0, now + i * 0.08);
+      gain.gain.linearRampToValueAtTime(0.12, now + i * 0.08 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.25);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now + i * 0.08);
+      osc.stop(now + i * 0.08 + 0.25);
+    });
+  } catch (e) {
+    // Silencieux si le navigateur bloque l'audio sans interaction préalable
+  }
 }
 
 function updateCartUI() {
@@ -180,13 +207,96 @@ function sendOrder() {
   msg += `\n🚚 *${fr?'Livraison':'Delivery'} :* ${fr?'Selon quartier':'Based on area'}`;
   if (note) msg += `\n📝 *Note :* ${note}`;
   msg += '\n\n_olaprestige.netlify.app_';
-  window.open('https://wa.me/2290152372275?text=' + encodeURIComponent(msg), '_blank');
+
+  // Afficher le reçu visuel stylé avant de rediriger vers WhatsApp
+  showReceipt({ name, zone, phone, note, items: [...cart], subtotal: sub, fr, waMsg: msg });
+
   cart = [];
   saveCart();
   updateCartUI();
   closeCheckout();
   closeCart();
-  toast(fr ? '🎉 Commande envoyée ! Merci.' : '🎉 Order sent! Thank you.');
+}
+
+/* ═══ REÇU DE COMMANDE VISUEL ═══ */
+function showReceipt(order) {
+  const overlay = document.createElement('div');
+  overlay.className = 'receipt-overlay';
+  overlay.id = 'receiptOverlay';
+
+  const orderNum = 'OP' + Date.now().toString().slice(-6);
+  const dateStr = new Date().toLocaleDateString(order.fr ? 'fr-FR' : 'en-US', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+
+  const itemsHtml = order.items.map(i => {
+    const nm = order.fr ? i.nameFr : i.nameEn;
+    return `<div class="receipt-item">
+      <span class="receipt-item-nm">${nm} <span class="receipt-item-qty">×${i.qty}</span></span>
+      <span class="receipt-item-pr">${fmt(i.price * i.qty)}</span>
+    </div>`;
+  }).join('');
+
+  overlay.innerHTML = `
+    <div class="receipt-card">
+      <div class="receipt-header">
+        <img src="logo.png" alt="OlaPrestige" class="receipt-logo">
+        <div class="receipt-brand">OlaPrestige</div>
+        <div class="receipt-tagline">${order.fr ? 'Le goût en abondance' : 'Taste in abundance'}</div>
+      </div>
+
+      <div class="receipt-check">
+        <span>✓</span>
+      </div>
+      <h3 class="receipt-title">${order.fr ? 'Commande confirmée' : 'Order confirmed'}</h3>
+      <p class="receipt-num">${order.fr ? 'N° de commande' : 'Order number'} : <strong>${orderNum}</strong></p>
+      <p class="receipt-date">${dateStr}</p>
+
+      <div class="receipt-divider"></div>
+
+      <div class="receipt-client">
+        <div><span>${order.fr ? 'Client' : 'Customer'}</span><strong>${order.name}</strong></div>
+        <div><span>${order.fr ? 'Zone' : 'Area'}</span><strong>${order.zone}</strong></div>
+        <div><span>${order.fr ? 'Téléphone' : 'Phone'}</span><strong>${order.phone}</strong></div>
+      </div>
+
+      <div class="receipt-divider"></div>
+
+      <div class="receipt-items">${itemsHtml}</div>
+
+      <div class="receipt-divider"></div>
+
+      <div class="receipt-total-row">
+        <span>${order.fr ? 'Sous-total' : 'Subtotal'}</span>
+        <span>${fmt(order.subtotal)}</span>
+      </div>
+      <div class="receipt-total-row receipt-total-main">
+        <strong>${order.fr ? 'Total estimé' : 'Estimated total'}</strong>
+        <strong>${fmt(order.subtotal + 1000)}</strong>
+      </div>
+
+      <p class="receipt-footer-note">${order.fr ? '💳 Paiement à la livraison ou Mobile Money' : '💳 Pay on delivery or Mobile Money'}</p>
+
+      <button class="btn-wa receipt-wa-btn" id="receiptWaBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        <span>${order.fr ? 'Envoyer sur WhatsApp' : 'Send on WhatsApp'}</span>
+      </button>
+      <button class="receipt-close-btn" id="receiptCloseBtn">${order.fr ? 'Fermer' : 'Close'}</button>
+    </div>`;
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => overlay.classList.add('open'));
+
+  document.getElementById('receiptWaBtn').addEventListener('click', () => {
+    window.open('https://wa.me/2290152372275?text=' + encodeURIComponent(order.waMsg), '_blank');
+  });
+
+  const closeReceipt = () => {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => overlay.remove(), 300);
+  };
+  document.getElementById('receiptCloseBtn').addEventListener('click', closeReceipt);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeReceipt(); });
 }
 
 /* ═══ RECHERCHE ═══ */
