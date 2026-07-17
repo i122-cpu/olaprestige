@@ -153,6 +153,7 @@
     <a href="#chawarma"   class="cat-lk" data-cat="chawarma"   data-fr="🥙 Chawarma"  data-en="🥙 Shawarma">🥙 Chawarma</a>
     <a href="#salades"    class="cat-lk" data-cat="salades"    data-fr="🥗 Salades"   data-en="🥗 Salads">🥗 Salades</a>
     <a href="#cuisses"    class="cat-lk" data-cat="cuisses"    data-fr="🍗 Cuisses"   data-en="🍗 Braised">🍗 Cuisses</a>
+    <a href="#poissons"   class="cat-lk" data-cat="poissons"   data-fr="🐟 Poissons"  data-en="🐟 Fish">🐟 Poissons</a>
     <a href="#pain-farci" class="cat-lk" data-cat="pain-farci" data-fr="🥖 Pain farci" data-en="🥖 Stuffed">🥖 Pain farci</a>
     <a href="#atieke"     class="cat-lk" data-cat="atieke"     data-fr="🍚 Atièkè"   data-en="🍚 Atièkè">🍚 Atièkè</a>
     <a href="#buche"      class="cat-lk" data-cat="buche"      data-fr="🎂 Bûche"    data-en="🎂 Yule Log">🎂 Bûche</a>
@@ -307,6 +308,42 @@
     </div>
   </section>
 
+  <!-- POISSONS -->
+  <section id="poissons" class="p-sec">
+    <div class="p-sec-hd">
+      <span class="p-sec-nm">🐟 <span data-fr="Poissons" data-en="Fish">Poissons</span></span>
+      <span class="p-tag gold" data-fr="Nouveau" data-en="New">Nouveau</span>
+    </div>
+    <div class="p-grid">
+      <article class="p-card" data-id="poisson1" data-name-fr="Poisson Braisé" data-name-en="Braised Fish" data-price="5000" data-img="assets/img/poissons/poisson-braise.jpg">
+        <div class="card-img">
+          <img src="assets/img/poissons/poisson-braise.jpg" alt="Poisson braisé grillé, servi avec accompagnement au choix" loading="lazy">
+          <span class="card-bdg gold" data-fr="✦ Nouveau" data-en="✦ New">✦ Nouveau</span>
+        </div>
+        <div class="card-bd">
+          <h3 class="card-nm" data-fr="Poisson Braisé" data-en="Braised Fish">Poisson Braisé</h3>
+          <p class="card-ds" data-fr="Poisson frais braisé, chair tendre et fumée, servi avec l'accompagnement de votre choix." data-en="Fresh braised fish, tender smoky flesh, served with the side of your choice.">Poisson frais braisé, chair tendre et fumée, servi avec l'accompagnement de votre choix.</p>
+
+          <div class="fg fish-side-select">
+            <label data-fr="Accompagnement *" data-en="Side dish *">Accompagnement *</label>
+            <select id="poisson1Side" class="fish-select">
+              <option value="Akassa" data-fr="Akassa" data-en="Akassa">Akassa</option>
+              <option value="Couscous" data-fr="Couscous" data-en="Couscous">Couscous</option>
+              <option value="Riz" data-fr="Riz" data-en="Rice">Riz</option>
+              <option value="Pâte rouge" data-fr="Pâte rouge" data-en="Red paste">Pâte rouge</option>
+              <option value="Piron" data-fr="Piron" data-en="Piron">Piron</option>
+            </select>
+          </div>
+
+          <div class="card-ft">
+            <div><span class="card-pr">5 000 F</span><span class="card-un" data-fr="+ accompagnement" data-en="+ side dish">+ accompagnement</span></div>
+            <button class="btn-add" onclick="addFishToCart(this)" data-fr="Ajouter" data-en="Add">Ajouter</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <!-- PAIN FARCI -->
   <section id="pain-farci" class="p-sec">
     <div class="p-sec-hd"><span class="p-sec-nm">🥖 <span data-fr="Pain farci" data-en="Stuffed Bread">Pain farci</span></span></div>
@@ -318,6 +355,18 @@
           <p class="card-ds" data-fr="Pains moelleux farcis à la viande et légumes assaisonnés — croustillants dehors, fondants dedans." data-en="Soft breads stuffed with seasoned meat and vegetables — crispy outside, tender inside.">Pains moelleux farcis à la viande et légumes assaisonnés — croustillants dehors, fondants dedans.</p>
           <div class="card-ft">
             <div><span class="card-pr">4 000 F</span><span class="card-un" data-fr="/ lot de 5" data-en="/ set of 5">/ lot de 5</span></div>
+            <button class="btn-add" onclick="addToCart(this)" data-fr="Ajouter" data-en="Add">Ajouter</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="p-card" data-id="painvien1" data-name-fr="Pain Viennois × 30" data-name-en="Viennese Bread × 30" data-price="3000" data-img="assets/img/Pain_farcis/pain-viennois.jpg">
+        <div class="card-img"><img src="assets/img/Pain_farcis/pain-viennois.jpg" alt="Pain viennois moelleux, lot de 30" loading="lazy"></div>
+        <div class="card-bd">
+          <h3 class="card-nm" data-fr="Pain Viennois" data-en="Viennese Bread">Pain Viennois</h3>
+          <p class="card-ds" data-fr="Pains viennois moelleux et légèrement sucrés, parfaits pour vos petits-déjeuners ou événements en grand nombre." data-en="Soft, lightly sweet Viennese bread rolls, perfect for breakfasts or events in large numbers.">Pains viennois moelleux et légèrement sucrés, parfaits pour vos petits-déjeuners ou événements en grand nombre.</p>
+          <div class="card-ft">
+            <div><span class="card-pr">3 000 F</span><span class="card-un" data-fr="/ lot de 30" data-en="/ set of 30">/ lot de 30</span></div>
             <button class="btn-add" onclick="addToCart(this)" data-fr="Ajouter" data-en="Add">Ajouter</button>
           </div>
         </div>

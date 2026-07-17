@@ -87,6 +87,41 @@ function addToCart(btn) {
   openCart();
 }
 
+/* ═══ AJOUT PANIER — POISSON BRAISÉ AVEC ACCOMPAGNEMENT ═══ */
+function addFishToCart(btn) {
+  const card = btn.closest('.p-card');
+  if (!card) return;
+  const price = parseInt(card.dataset.price);
+  if (!price) return;
+
+  const sideSelect = card.querySelector('.fish-select');
+  const sideValue = sideSelect ? sideSelect.value : '';
+  const sideOption = sideSelect ? sideSelect.options[sideSelect.selectedIndex] : null;
+  const sideFr = sideOption ? (sideOption.getAttribute('data-fr') || sideValue) : sideValue;
+  const sideEn = sideOption ? (sideOption.getAttribute('data-en') || sideValue) : sideValue;
+
+  // L'id inclut l'accompagnement pour que chaque variante soit une ligne distincte au panier
+  const baseId = card.dataset.id;
+  const id = baseId + '-' + sideValue.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  const nameFrBase = card.getAttribute('data-name-fr');
+  const nameEnBase = card.getAttribute('data-name-en') || nameFrBase;
+  const nameFr = `${nameFrBase} (${sideFr})`;
+  const nameEn = `${nameEnBase} (${sideEn})`;
+  const img = card.dataset.img;
+
+  const ex = cart.find(i => i.id === id);
+  if (ex) ex.qty++;
+  else cart.push({ id, nameFr, nameEn, price, img, qty:1 });
+
+  saveCart();
+  updateCartUI();
+  playAddSound();
+  const name = lang === 'en' ? nameEn : nameFr;
+  toast('✦ ' + name + (lang === 'fr' ? ' ajouté' : ' added'));
+  openCart();
+}
+
 /* ═══ SON DE CONFIRMATION — Web Audio API, pas besoin de fichier ═══ */
 let audioCtx = null;
 function playAddSound() {

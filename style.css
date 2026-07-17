@@ -2487,3 +2487,20 @@ body.light-mode .olabot-messages { background:#F5F5F5; }
 @media (max-width:400px) {
   .receipt-card { padding:22px 18px 20px; }
 }
+
+/* ═══════════ SÉLECTEUR ACCOMPAGNEMENT POISSON ═══════════ */
+.fish-side-select { margin-bottom:14px; }
+.fish-side-select label {
+  display:block; font-size:11px; font-weight:600;
+  color:var(--noir); margin-bottom:6px;
+  text-transform:uppercase; letter-spacing:0.3px;
+}
+.fish-select {
+  width:100%; padding:9px 12px;
+  border:1px solid #EDE8DF; border-radius:var(--rsm);
+  font-size:13px; font-family:'Inter',sans-serif;
+  background:var(--blanc); color:var(--noir);
+  outline:none; cursor:pointer;
+  transition:border-color var(--t);
+}
+.fish-select:focus { border-color:var(--or); }
