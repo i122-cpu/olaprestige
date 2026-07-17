@@ -168,7 +168,7 @@ function renderRecapPage() {
   if (totals)  totals.style.display = 'block';
   if (formCol) formCol.style.display = 'block';
 
-  const sub = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const sub = cartSubtotal();
 
   list.innerHTML = cart.map(item => {
     const nm = lang === 'en' ? item.nameEn : item.nameFr;
@@ -187,7 +187,7 @@ function renderRecapPage() {
   }).join('');
 
   document.getElementById('recapSub').textContent   = fmt(sub);
-  document.getElementById('recapTotal').textContent = fmt(sub + 1000);
+  document.getElementById('recapTotal').textContent = fmt(sub + DELIVERY_FEE);
 }
 
 function confirmRecapOrder() {
@@ -204,7 +204,7 @@ function confirmRecapOrder() {
   if (!zone)    { toast(fr ? '⚠️ Entrez votre quartier' : '⚠️ Enter your area'); return; }
   if (!address) { toast(fr ? '⚠️ Entrez votre adresse précise' : '⚠️ Enter your precise address'); return; }
 
-  const sub = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const sub = cartSubtotal();
 
   let msg = `✦ *${fr ? 'COMMANDE COMPLÈTE' : 'FULL ORDER'} — OlaPrestige*\\n\\n`;
   msg += `👤 *${fr ? 'Client' : 'Customer'} :* ${name}\\n`;

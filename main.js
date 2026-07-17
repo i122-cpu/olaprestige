@@ -47,9 +47,21 @@ setInterval(updateStatus, 60000);
 let cart = [];
 try {
   cart = JSON.parse(localStorage.getItem('ola-cart') || '[]');
+  // Sécurité : nettoyer toute donnée corrompue (prix non numériques, quantités invalides)
+  cart = cart.filter(i => i && typeof i.price === 'number' && !isNaN(i.price) && i.price > 0 && typeof i.qty === 'number' && i.qty > 0);
 } catch (e) {
   cart = [];
 }
+
+// Fonction centralisée de calcul du sous-total — utilisée PARTOUT pour garantir la cohérence
+function cartSubtotal() {
+  return cart.reduce((s, i) => {
+    const price = Number(i.price) || 0;
+    const qty   = Number(i.qty) || 0;
+    return s + (price * qty);
+  }, 0);
+}
+const DELIVERY_FEE = 1000;
 
 function saveCart() {
   localStorage.setItem('ola-cart', JSON.stringify(cart));
@@ -103,12 +115,12 @@ function playAddSound() {
 
 function updateCartUI() {
   const count = cart.reduce((s,i) => s + i.qty, 0);
-  const sub   = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const sub   = cartSubtotal();
   document.getElementById('cartN').textContent = count;
   const subEl = document.getElementById('cartSub');
   const totEl = document.getElementById('cartTot');
   if (subEl) subEl.textContent = fmt(sub);
-  if (totEl) totEl.textContent = fmt(sub + 1000);
+  if (totEl) totEl.textContent = fmt(sub + DELIVERY_FEE);
   const items = document.getElementById('cartItems');
   const empty = document.getElementById('cartEmpty');
   const ft    = document.getElementById('cartFt');
@@ -167,14 +179,14 @@ function closeCart() {
 /* ═══ CHECKOUT ═══ */
 function openCheckout() {
   if (!cart.length) { toast(lang === 'fr' ? 'Panier vide' : 'Cart is empty'); return; }
-  const sub = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const sub = cartSubtotal();
   document.getElementById('mSum').innerHTML =
     cart.map(i => {
       const n = lang === 'en' ? i.nameEn : i.nameFr;
       return `<div class="m-row"><span>${n} × ${i.qty}</span><span>${fmt(i.price*i.qty)}</span></div>`;
     }).join('') +
     `<div class="m-row"><span>${lang==='fr'?'Livraison':'Delivery'}</span><span>${lang==='fr'?'Selon quartier':'Based on area'}</span></div>
-     <div class="m-tot"><span>${lang==='fr'?'Total estimé':'Estimated total'}</span><span>${fmt(sub+1000)}</span></div>`;
+     <div class="m-tot"><span>${lang==='fr'?'Total estimé':'Estimated total'}</span><span>${fmt(sub + DELIVERY_FEE)}</span></div>`;
   document.getElementById('modalOv').classList.add('on');
 }
 function closeCheckout() {
@@ -193,7 +205,7 @@ function sendOrder() {
   if (!name)  { toast(fr ? '⚠️ Entrez votre nom' : '⚠️ Enter your name'); return; }
   if (!zone)  { toast(fr ? '⚠️ Entrez votre quartier' : '⚠️ Enter your area'); return; }
   if (!phone) { toast(fr ? '⚠️ Entrez votre téléphone' : '⚠️ Enter your phone'); return; }
-  const sub = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const sub = cartSubtotal();
   let msg = `✦ *COMMANDE OLAPRESTIGE*\n\n`;
   msg += `👤 *${fr?'Client':'Customer'} :* ${name}\n`;
   msg += `📍 *${fr?'Zone':'Area'} :* ${zone}\n`;
