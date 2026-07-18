@@ -2504,3 +2504,20 @@ body.light-mode .olabot-messages { background:#F5F5F5; }
   transition:border-color var(--t);
 }
 .fish-select:focus { border-color:var(--or); }
+
+/* ═══════════ ZONE LIVRAISON — CARTE SIMPLE ═══════════ */
+.zone-simple-card {
+  background:var(--blanc); border-radius:var(--r);
+  padding:28px 24px; text-align:center;
+  border:1px solid #EDE8DF; border-top:3px solid var(--or);
+}
+.zone-simple-icon { font-size:28px; display:block; margin-bottom:12px; }
+.zone-simple-title {
+  font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  font-size:18px; color:var(--noir); font-weight:600;
+  margin-bottom:12px;
+}
+.zone-simple-text {
+  font-size:13px; color:var(--gris);
+  line-height:1.75; font-weight:300;
+}
