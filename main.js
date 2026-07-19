@@ -403,15 +403,21 @@ const navObs = new IntersectionObserver(entries => {
 }, { threshold:0.2, rootMargin:'-120px 0px -50% 0px' });
 secs.forEach(s => navObs.observe(s));
 
-/* ═══ ANIMATIONS SCROLL ═══ */
+/* ═══ ANIMATIONS SCROLL — cascade fluide par groupe de grille ═══ */
 const animObs = new IntersectionObserver((entries, obs) => {
-  entries.forEach((e, i) => {
+  entries.forEach(e => {
     if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('vis'), (i % 4) * 70);
+      // Calcule la position de l'élément dans SA propre grille (pas globale)
+      // pour un effet de cascade cohérent même si plusieurs grilles apparaissent ensemble
+      const parent = e.target.parentElement;
+      const siblings = parent ? Array.from(parent.children).filter(c => c === e.target || (c.classList.contains('p-card') || c.classList.contains('avis-card'))) : [e.target];
+      const localIndex = siblings.indexOf(e.target);
+      const delay = Math.min(localIndex, 5) * 80;
+      setTimeout(() => e.target.classList.add('vis'), delay);
       obs.unobserve(e.target);
     }
   });
-}, { threshold:0.08 });
+}, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
 document.querySelectorAll('.p-card, .avis-card').forEach(el => animObs.observe(el));
 
 /* ═══ UTILS ═══ */
@@ -684,3 +690,50 @@ function notifyFamilyLaunch() {
 
   showToast(isEn ? '✓ You will be notified!' : '✓ Vous serez averti(e) !');
 }
+
+/* ═══ TRANSITIONS DE PAGE FLUIDES ═══ */
+(function pageTransitions() {
+  // Overlay d'entrée — s'estompe automatiquement au chargement (géré en CSS)
+  const fadeIn = document.createElement('div');
+  fadeIn.id = 'pageFadeOverlay';
+  document.body.appendChild(fadeIn);
+  setTimeout(() => { if (fadeIn) fadeIn.remove(); }, 400);
+
+  // Overlay de sortie — fondu vers noir avant de changer de page
+  const fadeOut = document.createElement('div');
+  fadeOut.className = 'page-transition-out';
+  fadeOut.id = 'pageFadeOutOverlay';
+  document.body.appendChild(fadeOut);
+
+  // Intercepter les clics sur les liens internes du même site (pas les ancres #, pas les liens externes)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('#')) return;                  // ancre locale — pas de transition
+    if (href.startsWith('http') && !href.includes(location.hostname)) return; // lien externe
+    if (link.target === '_blank') return;               // ouverture nouvel onglet
+    if (href.startsWith('tel:') || href.startsWith('mailto:')) return;
+
+    // C'est un lien interne classique (ex: menu.html, galerie.html...)
+    e.preventDefault();
+    fadeOut.classList.add('active');
+    setTimeout(() => { window.location.href = href; }, 260);
+  });
+})();
+
+/* ═══ REVEAL AU SCROLL POUR LES SECTIONS (hero, histoire, etc.) ═══ */
+(function initRevealSections() {
+  const revealObs = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('vis');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObs.observe(el));
+})();
