@@ -737,3 +737,31 @@ function notifyFamilyLaunch() {
 
   document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObs.observe(el));
 })();
+
+/* ═══ LIGHTBOX VIDÉO PRODUIT ═══ */
+function openVideoLightbox(src) {
+  const overlay = document.getElementById('videoLightbox');
+  const player  = document.getElementById('videoLightboxPlayer');
+  if (!overlay || !player) return;
+  player.src = src;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  player.play().catch(() => {});
+}
+
+function closeVideoLightbox() {
+  const overlay = document.getElementById('videoLightbox');
+  const player  = document.getElementById('videoLightboxPlayer');
+  if (!overlay || !player) return;
+  player.pause();
+  player.src = '';
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const overlay = document.getElementById('videoLightbox');
+    if (overlay && overlay.classList.contains('open')) closeVideoLightbox();
+  }
+});
